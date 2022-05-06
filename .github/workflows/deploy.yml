@@ -6,14 +6,26 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
+    name: Build & Deploy
     runs-on: ubuntu-latest
-    name: Build and Publish
-    environment: production
     timeout-minutes: 60
+
     steps:
       - uses: actions/checkout@v2
-      - name: Publish
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy
         uses: cloudflare/wrangler-action@1.3.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
