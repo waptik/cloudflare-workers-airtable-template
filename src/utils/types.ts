@@ -1,3 +1,4 @@
+import { Handler } from 'worktop'
 import { ServerRequest } from 'worktop/request'
 
 export type Config = {
@@ -24,3 +25,4 @@ interface RequestProps {
 }
 
 export type BaseServerRequest = ServerRequest<RequestProps>
+export type BaseHandler = Handler<RequestProps>

@@ -1,7 +1,7 @@
 import { Router } from 'worktop'
 import { listen } from 'worktop/cache'
 import * as CORS from 'worktop/cors'
-import { handleRequest } from './handler'
+import * as Airtable from './handler'
 
 const router = new Router()
 
@@ -12,28 +12,15 @@ const router = new Router()
 router.prepare = CORS.preflight({
   origin: '*', // allow any `Origin` to connect
   headers: ['Cache-Control', 'Content-Type', 'X-Count'],
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
 })
 
-router.add('GET', '/greet/:name', (req, res) => {
-  res.end(`Hello, ${req.params.name}!`)
-})
-
-// airtable enpoint
-router.add('GET', '/v0/:baseId/:tableId', async (req, res) => {
-  try {
-    const { body, headers } = await handleRequest(req)
-
-    for (const kv of headers.entries()) {
-      res.setHeader(kv[0], kv[1])
-    }
-
-    return res.send(201, body)
-  } catch (error) {
-    console.error(error)
-    return res.send(400, 'Bad Request')
-  }
-})
+// airtable enpoints
+router.add('GET', '/v0/:baseId/:tableId', Airtable.handleRequest)
+router.add('POST', '/v0/:baseId/:tableId', Airtable.handleRequest)
+router.add('PATCH', '/v0/:baseId/:tableId', Airtable.handleRequest)
+router.add('PUT', '/v0/:baseId/:tableId', Airtable.handleRequest)
+router.add('DELETE', '/v0/:baseId/:tableId', Airtable.handleRequest)
 
 router.add('GET', '/', (req, res) => {
   const command = `$ curl https://${req.hostname}/greet/waptik`
