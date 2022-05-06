@@ -1,4 +1,4 @@
-# ʕ •́؈•̀) `worker-typescript-template`
+# ʕ •́؈•̀) `cloudflare-workers-airtable-template`
 
 A batteries included template for kick starting a TypeScript Cloudflare worker project.
 
