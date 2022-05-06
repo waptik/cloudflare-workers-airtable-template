@@ -1,6 +1,7 @@
 import { Router } from 'worktop'
 import { listen } from 'worktop/cache'
 import * as CORS from 'worktop/cors'
+import { handleRequest } from './handler'
 
 const router = new Router()
 
@@ -16,6 +17,22 @@ router.prepare = CORS.preflight({
 
 router.add('GET', '/greet/:name', (req, res) => {
   res.end(`Hello, ${req.params.name}!`)
+})
+
+// airtable enpoint
+router.add('GET', '/v0/:baseId/:tableId', async (req, res) => {
+  try {
+    const { body, headers } = await handleRequest(req)
+
+    for (const kv of headers.entries()) {
+      res.setHeader(kv[0], kv[1])
+    }
+
+    return res.send(201, body)
+  } catch (error) {
+    console.error(error)
+    return res.send(400, 'Bad Request')
+  }
 })
 
 router.add('GET', '/', (req, res) => {

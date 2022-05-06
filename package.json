@@ -26,6 +26,7 @@
     "build": "run-s build:clean build:wt",
     "build:wt": "worktop build src/index.ts",
     "build:clean": "rimraf build",
+    "dev": "wrangler dev",
     "format": "prettier --write  '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
     "lint": "eslint --max-warnings=0 src && prettier --check '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
     "publish": "wrangler publish",
