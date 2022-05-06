@@ -9,6 +9,7 @@ jobs:
   build-and-deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 60
 
     steps:
