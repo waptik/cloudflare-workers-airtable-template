@@ -1,0 +1,12 @@
+name = "cloudflare-workers-airtable-template"
+type = "javascript"
+zone_id = ""
+account_id = ""
+route = ""
+workers_dev = true
+compatibility_date = "2022-05-05"
+
+[build]
+command = "yarn build"
+[build.upload]
+format = "service-worker"

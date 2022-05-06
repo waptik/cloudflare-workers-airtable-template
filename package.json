@@ -1,0 +1,64 @@
+{
+  "name": "cloudflare-workers-airtable-template",
+  "version": "1.0.0",
+  "description": "Cloudflare worker + Airtable + TypeScript template",
+  "main": "build/index.mjs",
+  "private": true,
+  "keywords": [
+    "cloudflare",
+    "typescript",
+    "airtable"
+  ],
+  "homepage": "https://github.com/waptik/cloudflare-workers-airtable-template#readme",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/waptik/cloudflare-workers-airtable-template/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waptik/cloudflare-workers-airtable-template.git"
+  },
+  "author": {
+    "name": "Stephane",
+    "email": "waptik@users.noreply.github.com"
+  },
+  "scripts": {
+    "build": "run-s build:clean build:wt",
+    "build:wt": "worktop build src/index.ts",
+    "build:clean": "rimraf build",
+    "format": "prettier --write  '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
+    "lint": "eslint --max-warnings=0 src && prettier --check '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
+    "publish": "wrangler publish",
+    "test": "jest --config jestconfig.json --verbose"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "typescript",
+      "prettier"
+    ]
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.0.0",
+    "@cloudflare/wrangler": "^1.19.12",
+    "@types/jest": "^26.0.23",
+    "@types/service-worker-mock": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-typescript": "^3.0.0",
+    "jest": "^27.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.0",
+    "rimraf": "^3.0.2",
+    "service-worker-mock": "^2.0.5",
+    "ts-jest": "^27.0.1",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.3.2",
+    "worktop.build": "^0.0.5"
+  },
+  "dependencies": {
+    "worktop": "^0.7.3"
+  }
+}
